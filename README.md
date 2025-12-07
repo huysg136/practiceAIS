@@ -1,8 +1,13 @@
 # FinalAssignment_PractiveAIS
 
-> **Project:** Final Assignment Practive AIS Application
-> **Author:**  Ngô Trần Tiến, Thái Gia Huy, Phạm Hồng Diệu Hương, Phan Hồ Nhã Uyên
-> **Description:** Web app triển khai các thuật toán mã hóa và giải mã RSA, DES, TripleDES, AES với giao diện trực quan, upload/download file và quản lý khóa.
+**Project:**  
+Final Assignment Practive AIS Application  
+
+**Author:**  
+Ngô Trần Tiến, Thái Gia Huy, Phạm Hồng Diệu Hương, Phan Hồ Nhã Uyên  
+
+**Description:**  
+Web app triển khai các thuật toán mã hóa và giải mã RSA, DES, TripleDES, AES với giao diện trực quan, upload/download file và quản lý khóa.
 
 ---
 
@@ -33,7 +38,7 @@
   - Upload file để mã hóa/giải mã.
   - Download file output.
 - **Frontend**
-  - HTML/CSS/JS giao diện thân thiện.
+  - HTML/CSS giao diện thân thiện.
   - Tương tác trực tiếp với API Flask.
 
 ## 🛠 Technologies
