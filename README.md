@@ -31,6 +31,6 @@ A **cryptography web application** built with **Python Flask**, implementing **R
 ## 🛠 Tech Stack
 
 - **Backend:** Python, Flask  
-- **Frontend:** HTML, CSS, JavaScript  
+- **Frontend:** HTML, CSS
 - **Cryptography / Security Libraries:** pycryptodome (DES, TripleDES, AES), sympy (RSA key generation)  
 - **Server / Deployment:** Gunicorn, Render 
