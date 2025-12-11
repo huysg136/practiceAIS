@@ -16,8 +16,6 @@ tripledes_demo = TripleDESDemo()
 rsacipherdemo = RSADemo
 
 # Biến global lưu key
-CURRENT_PUBLIC_KEY = None 
-CURRENT_PRIVATE_KEY = None
 CURRENT_DES_KEY = None
 DEFAULT_KEY = None
 
@@ -37,22 +35,21 @@ def enter_primes():
 #### RSA ONLY - GENERATE PUBLIC AND PRIVATE KEY FOR RSA #####
 @app.route("/generate_keys_manual", methods=["POST"])
 def generate_keys_manual():
-    global CURRENT_PUBLIC_KEY, CURRENT_PRIVATE_KEY
     p = int(request.form["p"])
     q = int(request.form["q"])
     
     try:
-        CURRENT_PUBLIC_KEY, CURRENT_PRIVATE_KEY, p_val, q_val, phi_val = rsacipherdemo.GenerateKeys(p, q)
+        public_key_val, private_key_val, p_val, q_val, phi_val = rsacipherdemo.GenerateKeys(p, q)
     except ValueError as err:
         return render_template("/RSA_templates/enterprimes.html", error=str(err))
 
-    e_val,n_val = CURRENT_PUBLIC_KEY
-    d_val,n_val = CURRENT_PRIVATE_KEY
+    e_val,n_val = public_key_val
+    d_val,n_val = private_key_val
 
     return render_template(
         "/RSA_templates/keys.html",
-        public_key=CURRENT_PUBLIC_KEY,
-        private_key=CURRENT_PRIVATE_KEY,
+        public_key=public_key_val,
+        private_key=private_key_val,
         q = q_val,
         p = p_val,
         phi = phi_val,
@@ -79,13 +76,16 @@ def encrypt_with_key():
 
     match algo:
         case "RSA":
-            global CURRENT_PUBLIC_KEY 
+            raw_key = request.form.get("public_key")
             plaintext = file.read().decode("utf-8")
-            if CURRENT_PUBLIC_KEY is None: 
+
+            e, n = map(int, raw_key.replace(" ", "").split(","))
+            public_key = (e, n)
+            if not public_key:
                 flash("You must generate an RSA key pair before encrypting.", "error")
                 return render_template("/RSA_templates/enterprimes.html")
             
-            cipher_block = rsacipherdemo.Encrypt(plaintext, CURRENT_PUBLIC_KEY)
+            cipher_block = rsacipherdemo.Encrypt(plaintext, public_key)
             with open(out_path,"w") as f:
                 f.write(" ".join(str(x) for x in cipher_block))
             return send_file(out_path, as_attachment=True)
@@ -143,13 +143,17 @@ def decrypt_with_key():
     
     match algo:
         case "RSA":
-            global CURRENT_PRIVATE_KEY 
+            raw_key = request.form.get("private_key")
+            d, n = map(int, raw_key.replace(" ", "").split(","))
+            
             cipher_text = file.read().decode("utf-8")
-            if CURRENT_PRIVATE_KEY is None: 
+            private_key = (d,n)
+
+            if not private_key:
                 flash("You must generate an RSA key pair before decrypting.", "error")
                 return render_template("/RSA_templates/enterprimes.html")
             cipher_blocks = [int(x) for x in cipher_text.split(" ")]
-            plaintext = rsacipherdemo.Decrypt(cipher_blocks, CURRENT_PRIVATE_KEY)
+            plaintext = rsacipherdemo.Decrypt(cipher_blocks, private_key)
             with open(out_path,"w") as f:
                 f.write(str(plaintext))
             return send_file(out_path, as_attachment=True)
