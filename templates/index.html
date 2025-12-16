@@ -8,8 +8,8 @@
 <body>
     <!-- Navigation Menu -->
     <div class="nav-container">
-        <a href="/" class="nav-link active">🔐 Encryption</a>
-        <a href="/bitcoin" class="nav-link">🪙 Bitcoin</a>
+        <a href="/" class="nav-link active">Encryption</a>
+        <a href="/bitcoin" class="nav-link">Bitcoin</a>
     </div>
 
     <div class="container">
@@ -54,7 +54,7 @@
         </div>
 
         <div id="rsa-section" style="display: none;">
-            <h3>🔑 Generate RSA Keys</h3>
+            <h3>Generate RSA Keys</h3>
             <p style="font-size: 14px; color: #6b46c1; margin-bottom: 15px;">Generate a new pair of public and private keys for RSA encryption</p>
             <form method="get" action="/enterprimes">
                 <button type="submit">Generate Keys</button>
@@ -64,7 +64,7 @@
         <div class="encrypt-decrypt-grid">
             <div class="section">
                 <div class="upload-section">
-                    <h3 class="encrypt-icon">🔒 Encrypt File</h3>
+                    <h3 class="encrypt-icon">Encrypt File</h3>
                     <form id="encryptForm" method="post" action="/encrypt_with_key" enctype="multipart/form-data">
                         <div class="file-input-wrapper">
                             <label>Select file to encrypt:</label>
@@ -77,7 +77,7 @@
 
             <div class="section">
                 <div class="upload-section">
-                    <h3 class="decrypt-icon">🔓 Decrypt File</h3>
+                    <h3 class="decrypt-icon">Decrypt File</h3>
                     <form id="decryptForm" method="post" action="/decrypt_with_key" enctype="multipart/form-data">
                         <div class="file-input-wrapper">
                             <label>Select encrypted file:</label>

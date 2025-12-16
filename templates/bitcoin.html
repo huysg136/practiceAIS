@@ -161,7 +161,7 @@
             const data = await response.json();
             if (data.success) {
                 wallets[name] = {pubkey_hash: data.pubkey_hash, pubkey: data.pubkey};
-                log(`✅ Generated wallet: ${name}`);
+                log(`Generated wallet: ${name}`);
                 updateWalletSelects();
                 document.getElementById('walletName').value = '';
             }
@@ -184,7 +184,7 @@
 
             const data = await response.json();
             if (data.success) {
-                log(`✅ Created genesis UTXO: ${amount} units for ${wallet}`);
+                log(`Created genesis UTXO: ${amount} units for ${wallet}`);
                 log(`   TXID: ${data.txid.substring(0, 16)}...`);
                 refreshAll();
             }
@@ -209,13 +209,13 @@
 
             const data = await response.json();
             if (data.success) {
-                log(`✅ Transaction created and validated!`);
+                log(`Transaction created and validated!`);
                 log(`   ${sender} → ${recipient}: ${amount} units`);
                 log(`   Fee: ${fee} | Change: ${data.change}`);
                 log(`   TXID: ${data.txid.substring(0, 16)}...`);
                 refreshAll();
             } else {
-                log(`❌ Transaction failed: ${data.message || 'Insufficient balance (amount + fee)'}`);
+                log(`Transaction failed: ${data.message || 'Insufficient balance (amount + fee)'}`);
             }
         }
 
@@ -224,10 +224,10 @@
             const data = await response.json();
             
             if (data.success) {
-                log(`⛏️ ${data.message}`);
+                log(`${data.message}`);
                 refreshAll();
             } else {
-                log(`❌ ${data.message}`);
+                log(`${data.message}`);
             }
         }
 
@@ -279,8 +279,8 @@
             }
         }
 
-        log('🚀 Mini Bitcoin Demo initialized');
-        log('👉 Start by generating wallets');
+        log('Mini Bitcoin Demo initialized');
+        log('Start by generating wallets');
         refreshAll();
     </script>
 </body>
